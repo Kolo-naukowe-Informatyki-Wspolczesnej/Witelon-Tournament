@@ -7,10 +7,8 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI commandWindow;
     public Button moveRightButton;
     public Button moveLeftButton;
-    public Button jumpLeftButton;
-    public Button jumpRightButton;
-    public Button jumpUpButton;
-    public Button waitButton;
+    public Button moveUpButton;
+    public Button moveDownButton;
     public Button startButton; // Dodaj referencję do przycisku "Start"
     public CommandExecutor commandExecutor;
     public GameObject playerPrefab; // Dodaj prefab gracza
@@ -19,10 +17,8 @@ public class GameController : MonoBehaviour
     {
         moveRightButton.onClick.AddListener(() => AddCommand("MoveRight()"));
         moveLeftButton.onClick.AddListener(() => AddCommand("MoveLeft()"));
-        jumpLeftButton.onClick.AddListener(() => AddCommand("JumpLeft()"));
-        jumpRightButton.onClick.AddListener(() => AddCommand("JumpRight()"));
-        jumpUpButton.onClick.AddListener(() => AddCommand("JumpUp()"));
-        waitButton.onClick.AddListener(() => AddCommand("Wait()"));
+        moveUpButton.onClick.AddListener(() => AddCommand("MoveUp()"));
+        moveDownButton.onClick.AddListener(() => AddCommand("MoveDown()"));
         startButton.onClick.AddListener(() => commandExecutor.ExecuteCommands()); // Podłącz przycisk "Start" do metody ExecuteCommands()
         
         // Utwórz gracza

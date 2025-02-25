@@ -6,6 +6,7 @@ using TMPro;
 public class CommandExecutor : MonoBehaviour
 {
     public GameObject playerObject;
+    public GameObject movePointObject;
     private PlayerController player;
     private Queue<string> commandsQueue = new Queue<string>();
     public int steps = 0;
@@ -49,17 +50,11 @@ public class CommandExecutor : MonoBehaviour
                 case "MoveLeft()":
                     player.MoveLeft();
                     break;
-                case "JumpLeft()":
-                    player.JumpLeft();
+                case "MoveUp()":
+                    player.MoveUp();
                     break;
-                case "JumpRight()":
-                    player.JumpRight();
-                    break;
-                case "JumpUp()":
-                    player.JumpUp();
-                    break;
-                case "Wait()":
-                    player.Wait();
+                case "MoveDown()":
+                    player.MoveDown();
                     break;
             }
             steps++;
@@ -82,8 +77,9 @@ public class CommandExecutor : MonoBehaviour
     private void ResetLevel()
     {
         playerObject.transform.position = playerStartPos;
+        movePointObject.transform.position = playerStartPos;
         steps = 0;
-        stepsText.text = "Kroki: " + steps;
+        stepsText.text = "Steps: " + steps;
         commandWindow.text = "";
         commandsQueue.Clear();
     }

@@ -5,6 +5,7 @@ public class FinishPoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+            Debug.Log("Fein");
         {
             PlayerController playerController = collision.GetComponent<PlayerController>();
             if (playerController != null)
