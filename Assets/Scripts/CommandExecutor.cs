@@ -58,21 +58,6 @@ public class CommandExecutor : MonoBehaviour
                     player.Move(PlayerController.Direction.DOWN);
                     break;
             }
-            //switch (command)
-            //{
-            //    case "MoveRight()":
-            //        player.MoveRight();
-            //        break;
-            //    case "MoveLeft()":
-            //        player.MoveLeft();
-            //        break;
-            //    case "MoveUp()":
-            //        player.MoveUp();
-            //        break;
-            //    case "MoveDown()":
-            //        player.MoveDown();
-            //        break;
-            //}
             steps++;
             stepsText.text = "Steps: " + steps;
             yield return new WaitForSeconds(1); // Czas pomiędzy ruchami

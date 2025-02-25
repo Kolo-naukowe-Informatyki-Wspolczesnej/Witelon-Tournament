@@ -9,9 +9,8 @@ public class GameController : MonoBehaviour
     public Button moveLeftButton;
     public Button moveUpButton;
     public Button moveDownButton;
-    public Button startButton; // Dodaj referencję do przycisku "Start"
+    public Button startButton;
     public CommandExecutor commandExecutor;
-    public GameObject playerPrefab; // Dodaj prefab gracza
 
     void Start()
     {
@@ -19,13 +18,8 @@ public class GameController : MonoBehaviour
         moveLeftButton.onClick.AddListener(() => AddCommand("MoveLeft()"));
         moveUpButton.onClick.AddListener(() => AddCommand("MoveUp()"));
         moveDownButton.onClick.AddListener(() => AddCommand("MoveDown()"));
-        startButton.onClick.AddListener(() => commandExecutor.ExecuteCommands()); // Podłącz przycisk "Start" do metody ExecuteCommands()
+        startButton.onClick.AddListener(() => commandExecutor.ExecuteCommands());
         
-        // Utwórz gracza
-        if (playerPrefab != null)
-        {
-            Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        }
     }
 
     void AddCommand(string command)
