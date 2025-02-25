@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class CommandExecutor : MonoBehaviour
 {
@@ -45,18 +46,33 @@ public class CommandExecutor : MonoBehaviour
             switch (command)
             {
                 case "MoveRight()":
-                    player.MoveRight();
+                    player.Move(PlayerController.Direction.RIGHT);
                     break;
                 case "MoveLeft()":
-                    player.MoveLeft();
+                    player.Move(PlayerController.Direction.LEFT);
                     break;
                 case "MoveUp()":
-                    player.MoveUp();
+                    player.Move(PlayerController.Direction.UP);
                     break;
                 case "MoveDown()":
-                    player.MoveDown();
+                    player.Move(PlayerController.Direction.DOWN);
                     break;
             }
+            //switch (command)
+            //{
+            //    case "MoveRight()":
+            //        player.MoveRight();
+            //        break;
+            //    case "MoveLeft()":
+            //        player.MoveLeft();
+            //        break;
+            //    case "MoveUp()":
+            //        player.MoveUp();
+            //        break;
+            //    case "MoveDown()":
+            //        player.MoveDown();
+            //        break;
+            //}
             steps++;
             stepsText.text = "Steps: " + steps;
             yield return new WaitForSeconds(1); // Czas pomiędzy ruchami
@@ -84,3 +100,4 @@ public class CommandExecutor : MonoBehaviour
         commandsQueue.Clear();
     }
 }
+
