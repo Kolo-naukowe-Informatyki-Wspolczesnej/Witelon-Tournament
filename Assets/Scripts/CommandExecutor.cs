@@ -14,8 +14,68 @@ public class CommandExecutor : MonoBehaviour
     public TextMeshProUGUI stepsText;
     public TextMeshProUGUI commandWindow;
     public GameObject winPanel;
-    // Usuń: public GameObject losePanel;
     private Vector3 playerStartPos;
+
+    private class ObjectData
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public Sprite sprite;
+        public bool colliderEnabled;
+        public Color color;
+    }
+
+    private List<ObjectData> gateDataList = new List<ObjectData>();
+    private List<ObjectData> buttonDataList = new List<ObjectData>();
+
+
+    private void SaveObjectData(string tag, List<ObjectData> dataList)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject obj in objects)
+        {
+            ObjectData data = new ObjectData();
+            data.position = obj.transform.position;
+            data.rotation = obj.transform.rotation;
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                data.sprite = spriteRenderer.sprite;
+                data.color = spriteRenderer.color;
+            }
+            Collider2D collider = obj.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                data.colliderEnabled = collider.enabled;
+            }
+            dataList.Add(data);
+        }
+    }
+
+    private void ResetObjectData(string tag, List<ObjectData> dataList)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (i < dataList.Count)
+            {
+                objects[i].transform.position = dataList[i].position;
+                objects[i].transform.rotation = dataList[i].rotation;
+                SpriteRenderer spriteRenderer = objects[i].GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.sprite = dataList[i].sprite;
+                    spriteRenderer.color = dataList[i].color;
+                }
+                Collider2D collider = objects[i].GetComponent<Collider2D>();
+                if (collider != null)
+                {
+                    collider.enabled = dataList[i].colliderEnabled;
+                }
+            }
+        }
+    }
+
 
     void Start()
     {
@@ -26,6 +86,9 @@ public class CommandExecutor : MonoBehaviour
         }
 
         playerStartPos = playerObject.transform.position;
+
+        SaveObjectData("Gate", gateDataList);
+        SaveObjectData("Button", buttonDataList);
     }
 
     public void AddCommand(string command)
@@ -60,7 +123,8 @@ public class CommandExecutor : MonoBehaviour
             }
             steps++;
             stepsText.text = "Steps: " + steps;
-            yield return new WaitForSeconds(1); // Czas pomiędzy ruchami
+            yield return new WaitUntil(() => player.isLoopFinished);
+            player.isLoopFinished = false;
         }
 
         // Sprawdzamy, czy gracz dotarł do obiektu wygranej
@@ -77,6 +141,8 @@ public class CommandExecutor : MonoBehaviour
 
     private void ResetLevel()
     {
+        ResetObjectData("Gate", gateDataList);
+        ResetObjectData("Button", buttonDataList);
         playerObject.transform.position = playerStartPos;
         movePointObject.transform.position = playerStartPos;
         steps = 0;

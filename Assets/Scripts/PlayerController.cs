@@ -1,4 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     public LayerMask blocksMovement;
     private Rigidbody2D rb;
+    public bool isLoopFinished = false;
 
     void Start()
     {
@@ -23,6 +27,11 @@ public class PlayerController : MonoBehaviour
         LEFT
     }
     public void Move(Direction direction)
+    {
+        StartCoroutine(DelayedMove(direction));
+    }
+
+    private IEnumerator DelayedMove(Direction direction)
     {
         Vector3 vector;
         switch (direction)
@@ -43,12 +52,12 @@ public class PlayerController : MonoBehaviour
                 vector = new Vector3(0, 0, 0);
                 break;
         }
-        if (!Physics2D.OverlapCircle(movePoint.position + vector, .2f, blocksMovement))
+        while (!Physics2D.OverlapCircle(movePoint.position + vector, .2f, blocksMovement))
         {
             movePoint.position += vector;
+            yield return new WaitForSeconds(0.5f);
         }
-        else Debug.Log("Collision detected");
-
+        isLoopFinished = true;
     }
 
 
