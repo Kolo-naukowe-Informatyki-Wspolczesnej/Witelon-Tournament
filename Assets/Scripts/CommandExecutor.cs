@@ -13,6 +13,7 @@ public class CommandExecutor : MonoBehaviour
     public int steps = 0;
     public TextMeshProUGUI stepsText;
     public TextMeshProUGUI commandWindow;
+    [SerializeField] TMP_Text finalSteps;
     public GameObject winPanel;
     private Vector3 playerStartPos;
 
@@ -88,6 +89,7 @@ public class CommandExecutor : MonoBehaviour
         playerStartPos = playerObject.transform.position;
 
         SaveObjectData("Gate", gateDataList);
+        SaveObjectData("Gate1", gateDataList);
         SaveObjectData("Button", buttonDataList);
     }
 
@@ -127,7 +129,6 @@ public class CommandExecutor : MonoBehaviour
             player.isLoopFinished = false;
         }
 
-        // Sprawdzamy, czy gracz dotarł do obiektu wygranej
         if (!player.HasReachedFinish)
         {
             ResetLevel();
@@ -136,6 +137,7 @@ public class CommandExecutor : MonoBehaviour
 
     public void ShowWinPanel()
     {
+        finalSteps.text = "Steps: " + steps;
         winPanel.SetActive(true);
     }
 

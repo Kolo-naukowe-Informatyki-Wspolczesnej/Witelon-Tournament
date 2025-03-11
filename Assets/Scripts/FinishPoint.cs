@@ -11,7 +11,7 @@ public class FinishPoint : MonoBehaviour
             {
                 playerController.HasReachedFinish = true;
                 CommandExecutor commandExecutor = FindObjectOfType<CommandExecutor>();
-                Timer timer = FindObjectsOfType<Timer>();
+                Timer timer = FindObjectOfType<Timer>();
                 timer.StopTimer();
                 commandExecutor.ShowWinPanel();
             }
