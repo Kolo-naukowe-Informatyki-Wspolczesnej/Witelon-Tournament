@@ -19,7 +19,8 @@ public class GameController : MonoBehaviour
         moveUpButton.onClick.AddListener(() => AddCommand("MoveUp()"));
         moveDownButton.onClick.AddListener(() => AddCommand("MoveDown()"));
         startButton.onClick.AddListener(() => commandExecutor.ExecuteCommands());
-        
+        Timer timer = FindObjectOfType<Timer>();
+        timer.StartTimer();
     }
 
     void AddCommand(string command)

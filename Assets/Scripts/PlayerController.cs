@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         movePoint.parent = null;
         HasReachedFinish = false;
+        movePoint.position = transform.position;
     }
 
     public enum Direction
