@@ -59,5 +59,9 @@ public class Timer : MonoBehaviour
     public void ResetTimer()
     {
         currentTime = 0.0f;
+        if (!timerActive)
+        {
+            StartTimer();
+        }
     }
 }

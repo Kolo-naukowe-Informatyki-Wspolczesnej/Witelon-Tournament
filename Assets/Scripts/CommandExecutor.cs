@@ -9,7 +9,7 @@ public class CommandExecutor : MonoBehaviour
     public GameObject playerObject;
     public GameObject movePointObject;
     private PlayerController player;
-    private Queue<string> commandsQueue = new Queue<string>();
+    public Queue<string> commandsQueue = new Queue<string>();
     public int steps = 0;
     public TextMeshProUGUI stepsText;
     public TextMeshProUGUI commandWindow;
@@ -141,7 +141,7 @@ public class CommandExecutor : MonoBehaviour
         winPanel.SetActive(true);
     }
 
-    private void ResetLevel()
+    public void ResetLevel()
     {
         ResetObjectData("Gate", gateDataList);
         ResetObjectData("Button", buttonDataList);
