@@ -16,6 +16,7 @@ public class CommandExecutor : MonoBehaviour
     [SerializeField] TMP_Text finalSteps;
     public GameObject winPanel;
     private Vector3 playerStartPos;
+    public int gateTypes;
 
     private class ObjectData
     {
@@ -26,7 +27,7 @@ public class CommandExecutor : MonoBehaviour
         public Color color;
     }
 
-    private List<ObjectData> gateDataList = new List<ObjectData>();
+    private Dictionary<string, List<ObjectData>> gateDataMap = new Dictionary<string, List<ObjectData>>();
     private List<ObjectData> buttonDataList = new List<ObjectData>();
 
 
@@ -88,9 +89,20 @@ public class CommandExecutor : MonoBehaviour
 
         playerStartPos = playerObject.transform.position;
 
-        SaveObjectData("Gate", gateDataList);
-        SaveObjectData("Gate1", gateDataList);
+        for (int i = 0; i < gateTypes; i++)
+        {
+            string gate = "Gate" + i.ToString();
+            Debug.Log(gate);
+
+            List<ObjectData> gateDataList = new List<ObjectData>();
+            SaveObjectData(gate, gateDataList);
+
+            gateDataMap[gate] = gateDataList; // Store the list in the dictionary
+        }
+
+        List<ObjectData> buttonDataList = new List<ObjectData>();
         SaveObjectData("Button", buttonDataList);
+        gateDataMap["Button"] = buttonDataList; // Store button data as well
     }
 
     public void AddCommand(string command)
@@ -143,14 +155,21 @@ public class CommandExecutor : MonoBehaviour
 
     public void ResetLevel()
     {
-        ResetObjectData("Gate", gateDataList);
-        ResetObjectData("Button", buttonDataList);
+        foreach (var gateEntry in gateDataMap)
+        {
+            string tag = gateEntry.Key;
+            List<ObjectData> dataList = gateEntry.Value;
+
+            Debug.Log(tag);
+            ResetObjectData(tag, dataList);
+        }
         playerObject.transform.position = playerStartPos;
         movePointObject.transform.position = playerStartPos;
         steps = 0;
         stepsText.text = "Steps: " + steps;
         commandWindow.text = "";
         commandsQueue.Clear();
+        player.HasReachedFinish = false;
     }
 }
 

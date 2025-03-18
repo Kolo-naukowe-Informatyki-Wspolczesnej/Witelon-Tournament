@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -46,5 +47,11 @@ public class MenuController : MonoBehaviour
         exec.ResetLevel();
         exec.winPanel.SetActive(false);
         Resume();
+    }
+    
+    public void ExitToMenu()
+    {
+        Resume();
+        SceneManager.LoadScene(0);
     }
 }

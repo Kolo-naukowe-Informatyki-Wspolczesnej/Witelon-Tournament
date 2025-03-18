@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 7f;
     public bool HasReachedFinish;
     public Transform movePoint;
     public LayerMask blocksMovement;
