@@ -41,5 +41,6 @@ public class GameController : MonoBehaviour
         {
             enableAddingCommands = false;
         }
+        else enableAddingCommands = true;
     }
 }
