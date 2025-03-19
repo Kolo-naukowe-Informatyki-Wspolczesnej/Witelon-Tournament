@@ -879,7 +879,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -899,11 +905,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: b31d7fc2-d204-4216-b0c5-521404a1f858
+  cloudProjectId: 4c96e468-9ace-4c65-9fda-6d8a2141061b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Witelonka
-  organizationId: unity_c5096a6e0925ad4d316a
+  projectName: Witelon Tournament (1)
+  organizationId: tankman647
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
