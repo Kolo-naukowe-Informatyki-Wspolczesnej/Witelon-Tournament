@@ -107,7 +107,7 @@ public class CommandExecutor : MonoBehaviour
 
     public void AddCommand(string command)
     {
-        commandsQueue.Enqueue(command);
+            commandsQueue.Enqueue(command);
     }
 
     public void ExecuteCommands()

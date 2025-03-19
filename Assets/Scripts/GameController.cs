@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     public Button startButton;
     public CommandExecutor commandExecutor;
 
+    private int commandLimit = 15;
+    private bool enableAddingCommands = true;
+
     void Start()
     {
         moveRightButton.onClick.AddListener(() => AddCommand("MoveRight()"));
@@ -25,7 +28,18 @@ public class GameController : MonoBehaviour
 
     void AddCommand(string command)
     {
-        commandWindow.text += command + "\n";
-        commandExecutor.AddCommand(command);
+        if (enableAddingCommands)
+        {
+            commandWindow.text += command + "\n";
+            commandExecutor.AddCommand(command);
+        }
+    }
+
+    void Update()
+    {
+        if (commandExecutor.commandsQueue.Count >= commandLimit)
+        {
+            enableAddingCommands = false;
+        }
     }
 }
