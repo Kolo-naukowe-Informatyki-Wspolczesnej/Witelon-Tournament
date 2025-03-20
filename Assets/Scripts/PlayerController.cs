@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
         }
         while (!Physics2D.OverlapCircle(movePoint.position + vector, .2f, blocksMovement))
         {
+            if (HasReachedFinish) 
+            {
+                break;
+            }
             movePoint.position += vector;
             yield return new WaitForSeconds(0.5f);
         }
@@ -65,9 +69,5 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        
     }
-
-
-
 }

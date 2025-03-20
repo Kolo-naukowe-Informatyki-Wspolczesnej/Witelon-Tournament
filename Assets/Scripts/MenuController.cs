@@ -37,6 +37,18 @@ public class MenuController : MonoBehaviour
                 Pause();
             }
         }
+        if (isPaused)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                CompleteReset();
+            }
+
+            if (Input.GetKey(KeyCode.M))
+            {
+                ExitToMenu();
+            }
+        }
     }
 
     public void CompleteReset()

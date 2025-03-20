@@ -28,10 +28,13 @@ public class GameController : MonoBehaviour
 
     void AddCommand(string command)
     {
-        if (enableAddingCommands)
+        if (commandExecutor.enableCommands)
         {
-            commandWindow.text += command + "\n";
-            commandExecutor.AddCommand(command);
+            if (enableAddingCommands)
+            {
+                commandWindow.text += command + "\n";
+                commandExecutor.AddCommand(command);
+            }
         }
     }
 

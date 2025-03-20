@@ -17,6 +17,7 @@ public class CommandExecutor : MonoBehaviour
     public GameObject winPanel;
     private Vector3 playerStartPos;
     public int gateTypes;
+    public bool enableCommands = true;
 
     private class ObjectData
     {
@@ -107,12 +108,19 @@ public class CommandExecutor : MonoBehaviour
 
     public void AddCommand(string command)
     {
+        if (enableCommands)
+        {
             commandsQueue.Enqueue(command);
+        }
     }
 
     public void ExecuteCommands()
     {
-        StartCoroutine(Execute());
+        if (enableCommands)
+        {
+            StartCoroutine(Execute());
+            enableCommands = false;
+        }
     }
 
     private IEnumerator Execute()
@@ -145,6 +153,8 @@ public class CommandExecutor : MonoBehaviour
         {
             ResetLevel();
         }
+
+        enableCommands = true;
     }
 
     public void ShowWinPanel()
@@ -163,12 +173,12 @@ public class CommandExecutor : MonoBehaviour
             Debug.Log(tag);
             ResetObjectData(tag, dataList);
         }
+        commandsQueue.Clear();
         playerObject.transform.position = playerStartPos;
         movePointObject.transform.position = playerStartPos;
         steps = 0;
         stepsText.text = "Steps: " + steps;
         commandWindow.text = "";
-        commandsQueue.Clear();
         player.HasReachedFinish = false;
     }
 }
