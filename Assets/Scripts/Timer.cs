@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
 
     private bool timerActive = false;
     private float currentTime = 0.0f;
+    private double finalTime = 0.0f;
 
     public TimeSpan time;
 
@@ -29,7 +30,8 @@ public class Timer : MonoBehaviour
         }
 
         time = TimeSpan.FromSeconds(currentTime);
-
+        finalTime = time.TotalSeconds;
+        
         int minutes = (int)time.Minutes;
         int seconds = (int)time.Seconds;
         int milli = (int)time.Milliseconds;
@@ -53,7 +55,7 @@ public class Timer : MonoBehaviour
         int seconds = (int)time.Seconds;
         int milli = (int)time.Milliseconds;
 
-        postGameTimer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milli);
+        postGameTimer.text = "Time: " + string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milli);
     }
 
     public void ResetTimer()
@@ -63,5 +65,10 @@ public class Timer : MonoBehaviour
         {
             StartTimer();
         }
+    }
+    
+    public double GetFinalTime()
+    {
+        return finalTime;
     }
 }

@@ -13,7 +13,7 @@ public class FinishPoint : MonoBehaviour
                 CommandExecutor commandExecutor = FindObjectOfType<CommandExecutor>();
                 Timer timer = FindObjectOfType<Timer>();
                 timer.StopTimer();
-                commandExecutor.ShowWinPanel();
+                commandExecutor.ShowWinPanel(timer.GetFinalTime());
             }
         }
     }
