@@ -161,7 +161,7 @@ public class CommandExecutor : MonoBehaviour
     public void ShowWinPanel(double time)
     {
         finalSteps.text = "Steps: " + steps;
-        double score = 1000 - time * 5 - steps * 20;
+        double score = 1000 - (time * 5) - (steps * 20);
         finalScoreText.text = "Score: " + score;
         winPanel.SetActive(true);
     }
