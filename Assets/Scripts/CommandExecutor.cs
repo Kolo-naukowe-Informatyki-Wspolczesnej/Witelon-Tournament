@@ -12,6 +12,7 @@ public class CommandExecutor : MonoBehaviour
     public Queue<string> commandsQueue = new Queue<string>();
     public int steps = 0;
     public TextMeshProUGUI stepsText;
+    public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI commandWindow;
     [SerializeField] TMP_Text finalSteps;
     public GameObject winPanel;
@@ -157,9 +158,11 @@ public class CommandExecutor : MonoBehaviour
         enableCommands = true;
     }
 
-    public void ShowWinPanel()
+    public void ShowWinPanel(double time)
     {
         finalSteps.text = "Steps: " + steps;
+        double score = 1000 - (time * 5) - (steps * 20);
+        finalScoreText.text = "Score: " + score;
         winPanel.SetActive(true);
     }
 
