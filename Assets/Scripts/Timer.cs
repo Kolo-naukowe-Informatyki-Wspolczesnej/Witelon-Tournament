@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using System;
+using TMPro;
+using UnityEngine;
 
 
 
@@ -17,27 +15,27 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private TMP_Text inGameTimer;
     [SerializeField] private TMP_Text postGameTimer;
-    
+
 
 
     // Update is called once per frame
     void Update()
     {
 
-        if(timerActive)
+        if (timerActive)
         {
             currentTime = currentTime + Time.deltaTime;
         }
 
         time = TimeSpan.FromSeconds(currentTime);
         finalTime = time.TotalSeconds;
-        
+
         int minutes = (int)time.Minutes;
         int seconds = (int)time.Seconds;
         int milli = (int)time.Milliseconds;
 
         inGameTimer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milli);
-        
+
     }
 
     public void StartTimer()
@@ -66,7 +64,7 @@ public class Timer : MonoBehaviour
             StartTimer();
         }
     }
-    
+
     public double GetFinalTime()
     {
         return finalTime;

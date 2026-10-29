@@ -164,6 +164,12 @@ public class CommandExecutor : MonoBehaviour
         double score = 1000 - (time * 5) - (steps * 20);
         finalScoreText.text = "Score: " + score;
         winPanel.SetActive(true);
+
+        if (PlayerSession.HasName)
+        {
+            ScoreSaver.Save(PlayerSession.PlayerName, time, steps, score);
+            PlayerSession.Clear();
+        }
     }
 
     public void ResetLevel()
