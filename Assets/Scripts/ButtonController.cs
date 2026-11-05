@@ -6,35 +6,48 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour
 {
 
-    public string tag;
- 
+    public string gateTag;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        GameObject[] gates = GameObject.FindGameObjectsWithTag(tag);
+        GameObject[] gates = GameObject.FindGameObjectsWithTag(gateTag);
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-        foreach (GameObject go in gates)
+
+        if (collision.CompareTag("Player"))
         {
-            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            SpriteRenderer gateSpriteRenderer = go.GetComponent<SpriteRenderer>();
-            Collider2D gateCollider = go.GetComponent<Collider2D>();
+            Color targetColor = spriteRenderer.color;
 
-            if (collision.CompareTag("Player"))
+            if (Mathf.Approximately(spriteRenderer.color.a, 1f))
             {
-                if (Mathf.Approximately(spriteRenderer.color.a, 1f))
+                Color newColor = spriteRenderer.color;
+                newColor.a = 0.25f;
+                spriteRenderer.color = newColor;
+            }
+            else
+            {
+                Color newColor = spriteRenderer.color;
+                newColor.a = 1f;
+                spriteRenderer.color = newColor;
+            }
+
+            GameObject[] allButtons = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject btn in allButtons)
+            {
+                SpriteRenderer btnSprite = btn.GetComponent<SpriteRenderer>();
+                if (btnSprite != null && btnSprite.color == targetColor)
                 {
-                    Color newColor = spriteRenderer.color;
-                    newColor.a = 0.25f;
-                    spriteRenderer.color = newColor;
+                    btnSprite.color = spriteRenderer.color;
                 }
-                else
-                {
-                    Color newColor = spriteRenderer.color;
-                    newColor.a = 1f;
-                    spriteRenderer.color = newColor;
-                }
+            }
+            foreach (GameObject go in gates)
+            {
+                SpriteRenderer gateSpriteRenderer = go.GetComponent<SpriteRenderer>();
+                Collider2D gateCollider = go.GetComponent<Collider2D>();
 
                 gateCollider.enabled = !gateCollider.enabled;
+
                 if (Mathf.Approximately(gateSpriteRenderer.color.a, 1f))
                 {
                     Color newColor = gateSpriteRenderer.color;
