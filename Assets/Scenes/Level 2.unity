@@ -662,6 +662,10 @@ PrefabInstance:
       propertyPath: tag
       value: Gate2
       objectReference: {fileID: 0}
+    - target: {fileID: 5150359632302300973, guid: 06df516400486344eabaf2849ed72e29, type: 3}
+      propertyPath: gateTag
+      value: Gate2
+      objectReference: {fileID: 0}
     - target: {fileID: 5171789539978971584, guid: 06df516400486344eabaf2849ed72e29, type: 3}
       propertyPath: m_Name
       value: Button (2)
@@ -25359,6 +25363,10 @@ PrefabInstance:
       propertyPath: tag
       value: Gate1
       objectReference: {fileID: 0}
+    - target: {fileID: 5150359632302300973, guid: 06df516400486344eabaf2849ed72e29, type: 3}
+      propertyPath: gateTag
+      value: Gate1
+      objectReference: {fileID: 0}
     - target: {fileID: 5171789539978971584, guid: 06df516400486344eabaf2849ed72e29, type: 3}
       propertyPath: m_Name
       value: Button (1)
@@ -25565,6 +25573,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5150359632302300973, guid: 06df516400486344eabaf2849ed72e29, type: 3}
       propertyPath: tag
+      value: Gate0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150359632302300973, guid: 06df516400486344eabaf2849ed72e29, type: 3}
+      propertyPath: gateTag
       value: Gate0
       objectReference: {fileID: 0}
     - target: {fileID: 5171789539978971584, guid: 06df516400486344eabaf2849ed72e29, type: 3}

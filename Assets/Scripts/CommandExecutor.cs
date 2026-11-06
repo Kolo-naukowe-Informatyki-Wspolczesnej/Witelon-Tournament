@@ -22,6 +22,7 @@ public class CommandExecutor : MonoBehaviour
 
     private class ObjectData
     {
+        public GameObject targetObject;
         public Vector3 position;
         public Quaternion rotation;
         public Sprite sprite;
@@ -39,6 +40,7 @@ public class CommandExecutor : MonoBehaviour
         foreach (GameObject obj in objects)
         {
             ObjectData data = new ObjectData();
+            data.targetObject = obj;
             data.position = obj.transform.position;
             data.rotation = obj.transform.rotation;
             SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
@@ -58,23 +60,22 @@ public class CommandExecutor : MonoBehaviour
 
     private void ResetObjectData(string tag, List<ObjectData> dataList)
     {
-        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
-        for (int i = 0; i < objects.Length; i++)
+        foreach (var data in dataList)
         {
-            if (i < dataList.Count)
+            if (data.targetObject != null)
             {
-                objects[i].transform.position = dataList[i].position;
-                objects[i].transform.rotation = dataList[i].rotation;
-                SpriteRenderer spriteRenderer = objects[i].GetComponent<SpriteRenderer>();
+                data.targetObject.transform.position = data.position;
+                data.targetObject.transform.rotation = data.rotation;
+                SpriteRenderer spriteRenderer = data.targetObject.GetComponent<SpriteRenderer>();
                 if (spriteRenderer != null)
                 {
-                    spriteRenderer.sprite = dataList[i].sprite;
-                    spriteRenderer.color = dataList[i].color;
+                    spriteRenderer.sprite = data.sprite;
+                    spriteRenderer.color = data.color;
                 }
-                Collider2D collider = objects[i].GetComponent<Collider2D>();
+                Collider2D collider = data.targetObject.GetComponent<Collider2D>();
                 if (collider != null)
                 {
-                    collider.enabled = dataList[i].colliderEnabled;
+                    collider.enabled = data.colliderEnabled;
                 }
             }
         }
@@ -102,7 +103,7 @@ public class CommandExecutor : MonoBehaviour
             gateDataMap[gate] = gateDataList; // Store the list in the dictionary
         }
 
-        List<ObjectData> buttonDataList = new List<ObjectData>();
+        buttonDataList = new List<ObjectData>();
         SaveObjectData("Button", buttonDataList);
         gateDataMap["Button"] = buttonDataList; // Store button data as well
     }

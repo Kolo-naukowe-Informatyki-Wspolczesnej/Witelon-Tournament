@@ -18,7 +18,9 @@ public class MainMenuController : MonoBehaviour
     public void Level1() => OpenNamePanel(1);
     
     public void Level2() => OpenNamePanel(2);
-    
+
+    public void Level3() => OpenNamePanel(3);
+
     public void Quit() => Application.Quit();
 
     void Start()
